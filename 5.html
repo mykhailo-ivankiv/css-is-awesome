@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Css is awesome</title>
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-width: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      position: relative;
+      padding: 0;
+      margin: 0;
+      height: 300px;
+      width: 300px;
+      border: 1px solid black;
+      font-family: sans-serif;
+      text-transform: uppercase;
+      font-size: 62px;
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      position: absolute;
+
+      height: 100%;
+      width: 100%;
+    }
+
+    #value {
+      position: absolute;
+      top: 0;
+      left: 0;
+      /*border: none;*/
+      /*color: transparent;*/
+      /*outline: none;*/
+    }
+
+  </style>
+</head>
+<body>
+  <input type="text" id="value" value="texas" autofocus="autofocus" tabindex="0">
+
+  <svg
+      class="container" id ="container"
+      viewBox="332 466 53 19" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <text stroke="none" fill="none" font-family="Helvetica" font-size="16" font-weight="normal">
+      <tspan id="text" x="332" y="481" fill="#000000">texas</tspan>
+    </text>
+  </svg>
+
+  <script src="//cdn.jsdelivr.net/interact.js/1.2.6/interact.min.js"></script>
+  <script>
+    document
+        .getElementById("value")
+        .addEventListener("input", (ev) => {
+          document.getElementById("text").textContent = ev.target.value;
+        }, false);
+
+    interact('.container')
+        .resizable({
+          preserveAspectRatio: false,
+          edges: { left: true, right: true, bottom: true, top: true }
+        })
+        .on('resizemove', function (event) {
+          var target = event.target,
+              x = (parseFloat(target.getAttribute('data-x')) || 0),
+              y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+          // update the element's style
+          target.style.width  = event.rect.width + 'px';
+          target.style.height = event.rect.height + 'px';
+
+          // translate when resizing from top or left edges
+          x += event.deltaRect.left;
+          y += event.deltaRect.top;
+
+          target.style.webkitTransform = target.style.transform =
+              'translate(' + x + 'px,' + y + 'px)';
+
+          target.setAttribute('data-x', x);
+          target.setAttribute('data-y', y);
+        });
+  </script>
+
+</body>
+</html>

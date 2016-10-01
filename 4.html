@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Css is awesome</title>
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-width: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      position: relative;
+      padding: 0;
+      margin: 0;
+      height: 300px;
+      width: 300px;
+      border: 1px solid black;
+      font-family: sans-serif;
+      text-transform: uppercase;
+      font-size: 62px;
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      position: absolute;
+
+      height: 100%;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container" id ="container">
+    <svg
+        class = "content"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 466 89 57" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <text id="css-is-awesome!" stroke="none" fill="#000000" font-size="16" font-weight="normal">
+        <tspan x="0" y="481" >css</tspan>
+        <tspan x="0" y="500" >is</tspan>
+        <tspan x="0" y="519" >awesome!</tspan>
+      </text>
+    </svg>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/interact.js/1.2.6/interact.min.js"></script>
+  <script>
+    interact('.container')
+        .resizable({
+          preserveAspectRatio: false,
+          edges: { left: true, right: true, bottom: true, top: true }
+        })
+        .on('resizemove', function (event) {
+          var target = event.target,
+              x = (parseFloat(target.getAttribute('data-x')) || 0),
+              y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+          // update the element's style
+          target.style.width  = event.rect.width + 'px';
+          target.style.height = event.rect.height + 'px';
+
+          // translate when resizing from top or left edges
+          x += event.deltaRect.left;
+          y += event.deltaRect.top;
+
+          target.style.webkitTransform = target.style.transform =
+              'translate(' + x + 'px,' + y + 'px)';
+
+          target.setAttribute('data-x', x);
+          target.setAttribute('data-y', y);
+        });
+  </script>
+
+</body>
+</html>
