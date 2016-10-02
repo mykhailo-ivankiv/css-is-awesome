@@ -2,77 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Css is awesome</title>
   <style>
-    html, body {
-      height: 100%;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
-    }
+    html, body { height: 100%; margin: 0; padding: 0; }
 
     body {
-      min-width: 100px;
       display: flex;
       justify-content: center;
       align-items: center;
+      font-family: sans-serif;
     }
 
     .container {
-      position: relative;
-      padding: 0;
-      margin: 0;
       height: 350px;
       width:  350px;
       border: 1px solid black;
-      font-family: sans-serif;
-      text-transform: uppercase;
     }
 
-    .content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .content { height: 100%; width: 100%; }
 
-      position: absolute;
-
-      height: 100%;
-      width: 100%;
-    }
-
-    #text {
-      width: 10px;
-      fill: #000000;
-    }
-    #value {
-      position: absolute;
-      top: 10px;
+    input[type="text"] {
+      position: absolute; width: 100%;
+      top: 0; left: 0;
+      text-align: center;
+      border: none; outline: none;  box-sizing: border-box;
     }
 
   </style>
 </head>
 <body>
-  <input type="text" id="value" value="t" autofocus="autofocus" tabindex="0">
+  <input type="text" id="value" value="T" autofocus="autofocus" tabindex="0">
 
   <div class="container" id ="container">
-    <svg
-        id = "svgRoot"
-        preserveAspectRatio="xMidYMid meet"
-        class="content"
-        viewBox="0 0 10 19" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <text>
-        <tspan id="text" x="0" y="15" font-size="16" fill="#000000">t</tspan>
-      </text>
+    <svg id="svgRoot" class="content" preserveAspectRatio="xMidYMid meet" viewBox="0 0 10 19">
+      <text id="text" y="15">T</text>
     </svg>
   </div>
 
-
-  <script src="//cdn.jsdelivr.net/interact.js/1.2.6/interact.min.js"></script>
   <script>
-
     const rootViewBox = document.getElementById("svgRoot").viewBox.baseVal;
 
     document
@@ -86,38 +53,22 @@
           el.textContent = ev.target.value;
           const after = el.getBoundingClientRect();
 
-          const [a,b,c] = [rootViewBox.width, after.width, before.width];
+          rootViewBox.width = rootViewBox.width * after.width / before.width;
+        });
+  </script>
 
-          rootViewBox.width = rootViewBox.width * (after.width / before.width);
-
-          console.log(rootViewBox.width, a, b, c);
-        }, false);
-
+  <script src="//cdn.jsdelivr.net/interact.js/1.2.6/interact.min.js"></script>
+  <script>
     interact('.container')
         .resizable({
           preserveAspectRatio: false,
           edges: { left: true, right: true, bottom: true, top: true }
         })
-        .on('resizemove', function (event) {
-          var target = event.target,
-              x = (parseFloat(target.getAttribute('data-x')) || 0),
-              y = (parseFloat(target.getAttribute('data-y')) || 0);
-
-          // update the element's style
-          target.style.width  = event.rect.width + 'px';
-          target.style.height = event.rect.height + 'px';
-
-          // translate when resizing from top or left edges
-          x += event.deltaRect.left;
-          y += event.deltaRect.top;
-
-          target.style.webkitTransform = target.style.transform =
-              'translate(' + x + 'px,' + y + 'px)';
-
-          target.setAttribute('data-x', x);
-          target.setAttribute('data-y', y);
+        .on('resizemove', (event) => {
+          let {style} = event.target;
+          style.width  = event.rect.width + 'px';
+          style.height = event.rect.height + 'px';
         });
   </script>
-
 </body>
 </html>
