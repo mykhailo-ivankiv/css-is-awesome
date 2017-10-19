@@ -6,9 +6,17 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen-16x10.css">
+	<script src="//cdn.jsdelivr.net/interact.js/1.2.6/interact.min.js"></script>
 	<style>
+		.resized {
+			pointer-events: none;
+		}
 		iframe.cover {
 			width: 100vw; height: 100vh
+		}
+		iframe.cover.small{
+			width: 30vw;
+			border-right: 10px solid white;
 		}
 	</style>
 </head>
@@ -25,8 +33,9 @@
 	<section class="slide" id="cover">
 		<h2>Ответ на главный вопрос в CSS</h2>
 		<p>
-			Как сделать жизнь прекрасной, волосы шелковистыми, а верстку неотразимой, <br>
-			или почему я ненавижу дизайнеров.
+			Как сделать жизнь прекрасной, волосы шелковистыми, а верстку неотразимой
+			<br>или
+			<br>Почему я ненавижу дизайнеров
 		</p>
 		<style>
 			#cover h2 {
@@ -103,7 +112,13 @@
 
 	<section class="slide">
 		<figure>
-			<img class="cover" src="pictures/AdolfHitler.jpg">
+			<img class="cover" src="pictures/capone/1200px-Al_Capone_in_1930.jpg">
+		</figure>
+	</section>
+
+	<section class="slide">
+		<figure>
+			<img class="cover" src="pictures/Chicago.png"/>
 		</figure>
 	</section>
 
@@ -136,12 +151,27 @@
 	</section>
 
 	<section class="slide">
-		<iframe class="cover" src="../2.html" frameborder="0"></iframe>
+		<iframe id="first-demo" class="cover small" src="../2.html" frameborder="0"></iframe>
+
+		<script>
+			interact('#first-demo')
+				.resizable({
+					preserveAspectRatio: false,
+					edges: { left: true, right: true, bottom: false, top: false}
+				})
+				.on('resizestart', (event) => event.target.classList.add("resized"))
+				.on('resizeend', (event) => event.target.classList.remove("resized"))
+				.on('resizemove', (event) => {
+					let {style} = event.target;
+					style.width  = event.rect.width + 'px';
+					style.height = event.rect.height + 'px';
+				});
+		</script>
 	</section>
 
 	<section class="slide">
 		<figure>
-			<img class="cover" src="pictures/Hitler-4.jpg">
+			<img class="cover" src="pictures/capone/_5.jpg">
 		</figure>
 	</section>
 
@@ -155,13 +185,156 @@
 	</section>
 
 	<section class="slide">
-		<iframe class="cover" src="../3.html" frameborder="0"></iframe>
+		<iframe id="second-demo" class="cover small" src="../3.html" frameborder="0"></iframe>
+		<script>
+			interact('#second-demo')
+				.resizable({
+					preserveAspectRatio: false,
+					edges: { left: true, right: true, bottom: false, top: false}
+				})
+				.on('resizestart', (event) => event.target.classList.add("resized"))
+				.on('resizeend', (event) => event.target.classList.remove("resized"))
+				.on('resizemove', (event) => {
+					let {style} = event.target;
+					style.width  = event.rect.width + 'px';
+					style.height = event.rect.height + 'px';
+				});
+		</script>
+	</section>
+
+	<section class="slide">
+		<pre>
+			<code>{</code>
+			<code>	...</code>
+			<code>	font-size: 18vw;</code>
+			<code>}</code>
+
+			<code>@media (min-width: 500px) {</code>
+			<code>  ... { font-size: 85px;} </code>
+			<code>}</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<iframe id="third-demo" class="cover small" src="../3.1.html" frameborder="0"></iframe>
+		<script>
+			interact('#third-demo')
+				.resizable({
+					preserveAspectRatio: false,
+					edges: { left: true, right: true, bottom: false, top: false}
+				})
+			.on('resizestart', (event) => event.target.classList.add("resized"))
+			.on('resizeend', (event) => event.target.classList.remove("resized"))
+			.on('resizemove', (event) => {
+				let {style} = event.target;
+			style.width  = event.rect.width + 'px';
+			style.height = event.rect.height + 'px';
+			});
+		</script>
+	</section>
+
+	<section class="slide">
+		<pre>
+			<code>{</code>
+			<code>	...</code>
+			<code>	font-size: 18vw;</code>
+			<code>}</code>
+
+			<code>@media (min-width: 500px) {</code>
+			<code>  ... { font-size: <mark class="important">calc</mark>(50px + 6.9vw);} </code>
+			<code>}</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<pre>
+			<code>{</code>
+			<code>	...</code>
+			<code>	font-size: min(18vw, calc(50px + 6.9vw));</code>
+			<code>}</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<iframe id="fourth-demo" class="cover small" src="../3.2.html" frameborder="0"></iframe>
+		<script>
+			interact('#fourth-demo')
+				.resizable({
+					preserveAspectRatio: false,
+					edges: { left: true, right: true, bottom: false, top: false}
+				})
+				.on('resizestart', (event) => event.target.classList.add("resized"))
+			.on('resizeend', (event) => event.target.classList.remove("resized"))
+			.on('resizemove', (event) => {
+				let {style} = event.target;
+				style.width  = event.rect.width + 'px';
+				style.height = event.rect.height + 'px';
+			});
+		</script>
 	</section>
 
 	<section class="slide">
 		<figure>
-			<img class="cover" src="pictures/HitlerSerious.jpg">
+			<img class="cover" src="pictures/First_chart.png">
 		</figure>
+	</section>
+
+	<section class="slide">
+		<figure>
+			<img class="cover" src="pictures/Second_chart.png">
+		</figure>
+	</section>
+
+	<section class="slide">
+		<figure>
+			<img class="cover" src="pictures/capone/al-capone-9237536-1-402.jpg">
+		</figure>
+	</section>
+
+	<section class="slide">
+		<iframe id="fifth-demo" class="cover small" src="../3.3.html" frameborder="0"></iframe>
+		<script>
+			interact('#fifth-demo')
+				.resizable({
+					preserveAspectRatio: false,
+					edges: { left: true, right: true, bottom: false, top: false}
+				})
+				.on('resizestart', (event) => event.target.classList.add("resized"))
+			.on('resizeend', (event) => event.target.classList.remove("resized"))
+			.on('resizemove', (event) => {
+				let {style} = event.target;
+				style.width  = event.rect.width + 'px';
+				style.height = event.rect.height + 'px';
+			});
+		</script>
+	</section>
+
+	<section class="slide">
+		<figure>
+			<img class="cover" src="pictures/forest.gif" style="width: 100%">
+		</figure>
+	</section>
+
+	<section class="slide">
+		<figure>
+			<img class="cover" src="pictures/sunset.jpg" style="width: 100%">
+		</figure>
+	</section>
+
+	<section class="slide">
+		<div class="place" >
+			<h2 style=" font-size: 80px">
+				Если не вернешься, <br/>я перепишу сайт <br>с&nbsp;<a href="/">React</a> на <a href="/">jQuery</a>!
+			</h2>
+			<p style="line-height: 35px; padding-top: 15px;">
+				<strong >
+					Целую, <br>
+					Аль Капоне.
+				</strong>
+			</p>
+
+		</div>
+
 	</section>
 
 	<section class="slide">
@@ -183,12 +356,6 @@
 	</section>
 
 	<section class="slide">
-		<figure>
-			<img class="cover" src="pictures/HitlerSmyling.jpg">
-		</figure>
-	</section>
-
-	<section class="slide">
 		<pre>
 			<code>const rootViewBox = svgRoot.<mark class="important">viewBox</mark>.baseVal</code>
 			<code>input</code>
@@ -206,8 +373,26 @@
 	</section>
 
 	<section class="slide">
+		<pre>
+			<code>&lt;svg</code>
+			<code>    viewBox="0 0 10 19"</code>
+			<code>    preserveAspectRatio="xMidYMid meet"&gt;</code>
+			<code>  &lt;text&gt; </code>
+			<code>    &lt;tspan x="0" <mark class="important">y="15"</mark> &gt;css&lt;/tspan&gt; </code>
+			<code>    &lt;tspan x="0" <mark class="important">y="34"</mark> &gt;is&lt;/tspan&gt; </code>
+			<code>    &lt;tspan x="0" <mark class="important">y="53"</mark> &gt;awesome!&lt;/tspan&gt; </code>
+			<code>  &lt;/text&gt; </code>
+			<code>&lt;/svg&gt; </code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<iframe class="cover" src="../5.1.html" frameborder="0"></iframe>
+	</section>
+
+	<section class="slide">
 		<figure>
-			<img class="cover" src="pictures/HitlerPanda.jpg">
+			<img class="cover" src="pictures/capone/capone.jpg">
 		</figure>
 	</section>
 
@@ -219,7 +404,6 @@
 	</section>
 
 	<script src="node_modules/shower-core/shower.min.js"></script>
-	<!-- Copyright © 2017 Yours Truly, Famous Inc. -->
 
 </body>
 </html>
